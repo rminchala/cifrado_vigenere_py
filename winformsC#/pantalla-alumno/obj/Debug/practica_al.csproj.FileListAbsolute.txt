@@ -1,0 +1,14 @@
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.Properties.Resources.resources
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.csproj.GenerateResource.cache
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.csproj.CoreCompileInputs.cache
+C:\Users\rober\source\repos\practica_al\bin\Debug\practica_al.exe.config
+C:\Users\rober\source\repos\practica_al\bin\Debug\practica_al.exe
+C:\Users\rober\source\repos\practica_al\bin\Debug\practica_al.pdb
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.exe
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.pdb
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.pantallas.Principal.resources
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.pantallas.frmEstudiante.resources
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.csproj.AssemblyReference.cache
+C:\Users\rober\source\repos\practica_al\bin\Debug\MiLibreria.dll
+C:\Users\rober\source\repos\practica_al\bin\Debug\MiLibreria.pdb
+C:\Users\rober\source\repos\practica_al\obj\Debug\practica_al.csproj.CopyComplete

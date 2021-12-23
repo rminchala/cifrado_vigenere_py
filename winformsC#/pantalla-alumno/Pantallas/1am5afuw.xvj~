@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using practica_al.Datos; //usar la carpeta Datos ya que ahi están las clases tambien la clase que funciona como var globla valor
+
+namespace practica_al.Pantallas
+{
+    public partial class frmEstudiante : Form
+    {
+        ClsEstudiante objStudent = new ClsEstudiante();
+        
+
+        string operacionTipo = "insert";
+        // private string[] arr_genero = new string[] { "MASCULINO", "FEMENINO" };
+        private string[] arr_genero = new string[] { MASCULINO, FEMENINO };
+        private string v_genero;
+        public frmEstudiante()
+        {
+            InitializeComponent();
+        }
+        private void FrmEstudiante_Load(object sender, EventArgs e)
+        {
+            string color = "#FFB000"; // color mostaza del encabezado del grid
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml(color); //("#BFDBFF"); color celeste
+            
+            ShowStudent(); //mostrar el grid de todos los registros existentes
+        }
+        private void Btnsalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btnagregar_Click(object sender, EventArgs e)
+        {
+            v_genero = cmbgenero.Text; 
+            if (v_genero == arr_genero[0] || v_genero == arr_genero[1])
+            {
+                if (string.IsNullOrWhiteSpace(textpaterno.Text) || String.IsNullOrWhiteSpace(textmaterno.Text) || String.IsNullOrWhiteSpace(textnombre.Text))
+                {                   
+                    MessageBox.Show(" Datos erróneos,...debe ingresar toda la información requerida ");                                 
+                }
+                else
+                {                   
+                    switch (operacionTipo)
+                    {
+                        case "insert":
+                            objStudent._last_name = textpaterno.Text;
+                            objStudent._middle_name = textmaterno.Text;
+                            objStudent._first_name = textnombre.Text;
+                            objStudent._gender = cmbgenero.SelectedItem.ToString();
+                            objStudent.InsertStudent();  
+                            MessageBox.Show(" Registro grabado!!! ");
+                            break;
+                        case "editar": //opcion modificar/actualizar
+                            objStudent._last_name = textpaterno.Text;
+                            objStudent._middle_name = textmaterno.Text;
+                            objStudent._first_name = textnombre.Text;
+                            objStudent._gender = cmbgenero.SelectedItem.ToString();
+                            objStudent.EditStudent();  
+                            MessageBox.Show(" Registro actualizado!!! ");
+                            operacionTipo = "insertar";
+                            break;
+                        default:
+                            break;
+                            
+                    }
+                    ShowStudent();
+                    CleanForm();  //limpiar el formulario    
+                }
+            }
+            else
+            {
+                MessageBox.Show("error en datos, debe seleccionar el genero");
+            }
+        }
+        private void CleanForm()
+        {
+            textpaterno.Clear();
+            textmaterno.Clear();
+            textnombre.Clear();
+            
+        }
+        private void ShowStudent()  //colocar los datos de la tabla student en el datagrid
+        {
+            dataGridView1.DataSource = objStudent.ListStudent();
+        }
+
+        private void Btnactualiza_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count > 0)  //verificar que se haya seleccionado toda la fila del datagrid
+            {
+                operacionTipo = "editar";
+                objStudent._id_student = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                textpaterno.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                textmaterno.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                textnombre.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+               
+            }
+            else
+                MessageBox.Show("Debe seleccionar una fila y luego presione el botón [Agregar]");
+        }
+     
+        // método que sirve para que al dar un clic en la fila del datagrid, ésta información sea puesto en 
+        // las cajas de textbox.
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            //if (dataGridView1.RowCount !=0 )
+            //{
+                int _row = dataGridView1.CurrentCell.RowIndex;
+
+                operacionTipo = "editar";
+               
+                objStudent._id_student = Convert.ToInt32(dataGridView1[0, _row].Value.ToString());
+                textpaterno.Text = dataGridView1[1, _row].Value.ToString();
+                textmaterno.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                textnombre.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+               
+            // }   
+
+        }
+    }
+}
